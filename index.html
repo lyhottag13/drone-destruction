@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="index.css"
+</head>
+<body>
+    <div id="timers">
+        <div id="drone-timer" class="old">00:00:000</div>
+        <div id="missile-timer" class="old">00:00:000</div>
+    </div>
+    <div id="positions">
+        <div id="drone-x">0</div>
+        <div id="drone-y">0</div>
+        <div id="missile-x">0</div>
+        <div id="missile-y">0</div>
+    </div>
+    <div id="hit-x"></div>
+    <div id="hit-y"></div>
+    <div id="angle" class="old">&theta;:</div>
+    <button id="start">START</button>
+    <button id="launch">LAUNCH</button>
+    <div id="drone-container">
+        <img id="drone-image" src="images/drone.gif">
+    </div>
+    <div id="overlay">
+        <div id="black"></div>
+        <img id="congrats" src="images/congrats.png">
+    </div>
+    <script src="index.js"></script>
+</body>

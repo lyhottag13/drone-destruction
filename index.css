@@ -1,0 +1,118 @@
+@font-face {
+    font-family: 'digital';
+    src: url(fonts/digital.ttf);
+}
+
+body {
+    background-color: #c6c6c6;
+}
+
+#launch {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bolder;
+    background-color: red;
+    color: white;
+    border-radius: 100%;
+    height: 200px;
+    width: 200px;
+    transition: all 0.2s ease;
+    border: solid black 4px;
+}
+
+#launch:disabled {
+    filter: drop-shadow(0px 0px 0px black) brightness(0.5);
+}
+
+#launch:disabled:active {
+    filter: drop-shadow(0px 0px 0px black) brightness(0.5);
+}
+
+#launch.launch-enabled {
+    filter: drop-shadow(0px 10px 0px black);
+    transform: translateX(-50%) translateY(-50%) translateY(-10px);
+}
+
+#launch:active {
+    transition: none;
+    filter: drop-shadow(0px 0px 0px black);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+#timers {
+    position: absolute;
+    left: 50vw;
+    top: 0;
+    transform: translateX(-50%) translateY(-100%);
+    border: 4px solid black;
+    border-top: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: all 1s cubic-bezier(0.00, 0.2, 0.2, 1);
+}
+
+#timers.down {
+    transform: translateX(-50%);
+
+}
+
+.old {
+    font-size: 50px;
+    font-family: 'digital', Courier, monospace;
+    font-weight: 700;
+    background-color: rgb(53, 53, 53);
+    color: rgb(0, 200, 0);
+}
+
+#angle {
+    position: absolute;
+    right: 10vw;
+    bottom: 0;
+    width: 300px;
+}
+
+#drone-container {
+    z-index: -1;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    right: 1vw;
+    height: 100vh;
+    width: 30vw;
+    background-color: #E5E9EB;
+}
+
+#drone-image {
+    width: 20vw;
+    transition: all 1s cubic-bezier(0.3, 0, 0.7, 1);
+}
+
+#overlay {
+    z-index: -1;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    transition: opacity 1s ease;
+}
+
+#black {
+    background-color: black;
+    opacity: 1;
+    width: 100vw;
+    height: 100vh;
+}
+
+#congrats {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    height: 200px;
+}
