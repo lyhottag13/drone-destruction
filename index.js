@@ -20,7 +20,8 @@ const elements = {
         launch: document.getElementById('launch')
     },
     img: {
-        drone: document.getElementById('drone-image')
+        drone: document.getElementById('drone-image'),
+        key: document.getElementById('key')
     }
 }
 
@@ -29,8 +30,18 @@ let missileTimer;
 
 function main() {
     elements.button.launch.disabled = true;
-    elements.button.start.addEventListener('click', startDrone);
-    elements.button.launch.addEventListener('click', launch);
+    elements.button.start.disabled = true;
+    elements.button.start.addEventListener('mousedown', startDrone);
+    elements.button.launch.addEventListener('mousedown', launch);
+    elements.img.key.addEventListener('mousedown', () => {
+        elements.img.key.src = 'images/key2.png';
+        elements.button.start.disabled = false;
+    }, { once: true });
+    
+    startDroneMovement();
+}
+
+function startDroneMovement() {
     setInterval(() => {
         elements.img.drone.style.transform = 'translateY(30px)';
     }, 2000);
