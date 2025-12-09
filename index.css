@@ -2,9 +2,14 @@
     font-family: 'digital';
     src: url(fonts/digital.ttf);
 }
+@font-face {
+    font-family: 'flip';
+    src: url(fonts/FLIPclockblack.ttf);
+}
 
 body {
     background-color: #c6c6c6;
+    overflow: hidden;
 }
 
 #launch {
@@ -48,6 +53,7 @@ body {
     left: 50vw;
     top: 0;
     transform: translateX(-50%) translateY(-100%);
+    padding: 20px;
     border: 4px solid black;
     border-top: 0;
     border-bottom-left-radius: 10px;
@@ -72,7 +78,16 @@ body {
     position: absolute;
     right: 10vw;
     bottom: 0;
-    width: 300px;
+    transform: translateY(100%);
+    transition: all 1s cubic-bezier(0.00, 0.2, 0.2, 1);
+    padding: 20px;
+    padding-bottom: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+#angle.enabled {
+    transform: translateY(0);
 }
 
 #drone-container {
@@ -115,4 +130,27 @@ body {
     left: 50vw;
     transform: translate(-50%, -50%);
     height: 200px;
+}
+
+#positions {
+    align-content: center;
+    text-align: center;
+    position: absolute;
+    background-color: rgb(255, 241, 179);
+    font-family: 'flip';
+    font-size: clamp(1rem, 70px, 5rem);
+    width: 20vw;
+    height: 80vh;
+    top: 50vh;
+    left: 0;
+    transform: translateY(-50%) translateX(-100%);
+    transition: all 1s cubic-bezier(0.00, 0.2, 0.2, 1);
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    border: 4px solid black;
+    border-left: 0;
+}
+
+#positions.enabled {
+    transform: translateY(-50%) translateX(0);
 }

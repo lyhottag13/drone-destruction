@@ -10,7 +10,8 @@ const elements = {
         hitX: document.getElementById('hit-x'),
         hitY: document.getElementById('hit-y'),
         timers: document.getElementById('timers'),
-        overlay: document.getElementById('overlay')
+        overlay: document.getElementById('overlay'),
+        positions: document.getElementById('positions'),
     },
     button: {
         /** @type {HTMLButtonElement} */
@@ -22,8 +23,6 @@ const elements = {
         drone: document.getElementById('drone-image')
     }
 }
-
-const TIME_STEP = 0.01;
 
 let droneTimer;
 let missileTimer;
@@ -52,7 +51,7 @@ function startDrone() {
         elements.button.launch.disabled = false;
         elements.button.launch.className = 'launch-enabled';
     }, 6.63 * 1000);
-    elements.div.timers.className = 'down';
+    elements.div.timers.classList.add('down');
     elements.button.start.disabled = true;
 }
 
@@ -117,8 +116,10 @@ function launch() {
     elements.div.hitX.textContent = `${hitDisplacement.toFixed(2)} m`;
     elements.div.hitY.textContent = `${hitHeight.toFixed(2)} m`;
 
-    elements.div.angle.textContent = `\u03B8: ${missileAngle.toFixed(2)}\u00B0`;
+    elements.div.angle.textContent = `${missileAngle.toFixed(2)}\u00B0`;
+    elements.div.angle.classList.add('enabled');
 
+    elements.div.positions.classList.add('enabled');
 }
 
 class Timer {
@@ -135,7 +136,7 @@ class Timer {
             this.elapsedTime = performance.now() - this.startTime;
             const minutes = Math.floor(this.elapsedTime / 60000);
             const seconds = Math.floor((this.elapsedTime / 1000) % 60);
-            const milliseconds = this.elapsedTime % 1000;
+            const milliseconds = Math.floor(this.elapsedTime % 1000);
             this.div.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}:${String(milliseconds).padStart(3, '0')}`;
         }, 40);
     }
@@ -173,8 +174,10 @@ class FlyingObject {
             const calculatedX = this.speed * Math.cos(angleRadians) * this.elapsedTime / 1000 + this.initialPositionX;
             const calculatedY = this.speed * Math.sin(angleRadians) * this.elapsedTime / 1000 + this.initialPositionY;
 
-            this.positionX = calculatedX.toFixed(2);
-            this.positionY = calculatedY.toFixed(2);
+            this.positionX = calculatedX.toFixed(2).padStart(5, '0');
+            this.positionY = calculatedY.toFixed(2).padStart(5, '0');
+
+            console.log(this.positionX);
 
             this.divX.textContent = this.positionX;
             this.divY.textContent = this.positionY;
