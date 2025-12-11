@@ -12,6 +12,7 @@ const elements = {
         timers: document.getElementById('timers'),
         overlay: document.getElementById('overlay'),
         positions: document.getElementById('positions'),
+        eta: document.getElementById('eta'),
     },
     button: {
         /** @type {HTMLButtonElement} */
@@ -84,7 +85,7 @@ function launch() {
         droneX,
         droneY,
         droneXDiv,
-        droneYDiv
+        droneYDiv,
     );
 
     drone.start();
@@ -101,7 +102,7 @@ function launch() {
         missileX,
         missileY,
         missileXDiv,
-        missileYDiv
+        missileYDiv,
     );
     missile.start();
 
@@ -115,22 +116,34 @@ function launch() {
         setTimeout(() => {
             elements.img.drone.remove();
         }, 510);
-        setTimeout(() => {
-            elements.div.overlay.style.zIndex = '1';
-            elements.div.overlay.style.opacity = '1';
-        }, 3000);
+        // setTimeout(() => {
+        //     elements.div.overlay.style.zIndex = '1';
+        //     elements.div.overlay.style.opacity = '1';
+        // }, 6000);
     }, hitTime * 1000);
 
     const hitHeight = missileSpeed * Math.sin(missileAngle * Math.PI / 180) * hitTime;
     const hitDisplacement = missileSpeed * Math.cos(missileAngle * Math.PI / 180) * hitTime + 7;
 
-    elements.div.hitX.textContent = `${hitDisplacement.toFixed(2)} m`;
-    elements.div.hitY.textContent = `${hitHeight.toFixed(2)} m`;
+    elements.div.hitX.textContent = hitDisplacement.toFixed(2);
+    elements.div.hitY.textContent = hitHeight.toFixed(2);
 
     elements.div.angle.textContent = `${missileAngle.toFixed(2)}\u00B0`;
     elements.div.angle.classList.add('enabled');
 
     elements.div.positions.classList.add('enabled');
+
+    const spanMin = document.createElement('span');
+    spanMin.textContent = Math.floor(hitTime / 60);
+
+    const spanSec = document.createElement('span');
+    spanSec.textContent = (hitTime % 60).toFixed(1);
+
+    elements.div.eta.textContent = 'ETA: ';
+    elements.div.eta.append(spanMin);
+    elements.div.eta.textContent += ' MIN ';
+    elements.div.eta.append(spanSec);
+    elements.div.eta.textContent += ' SEC';
 }
 
 class Timer {
@@ -163,7 +176,8 @@ class FlyingObject {
         positionX,
         positionY,
         divX,
-        divY
+        divY,
+        name
     ) {
         this.speed = speed;
         this.angle = angle;
@@ -174,6 +188,7 @@ class FlyingObject {
         this.intervalId;
         this.divX = divX;
         this.divY = divY;
+        this.name = name;
         this.startTime = performance.now();
         this.elapsedTime;
     }
@@ -187,8 +202,6 @@ class FlyingObject {
 
             this.positionX = calculatedX.toFixed(2).padStart(5, '0');
             this.positionY = calculatedY.toFixed(2).padStart(5, '0');
-
-            console.log(this.positionX);
 
             this.divX.textContent = this.positionX;
             this.divY.textContent = this.positionY;
